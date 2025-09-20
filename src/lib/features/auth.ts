@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { jwtDecode } from "jwt-decode";
 import { addProjectsFromUser } from "./projects";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 interface Organization {
   id: string | null;
   name: string | null;
@@ -63,7 +65,7 @@ export const loginUser1FA = createAsyncThunk(
   ) => {
     try {
       const response = await fetch(
-        "https://mvp-api-test-771209590309.us-east1.run.app/auth/login_step1",
+        `${API_URL}/auth/login_step1`,
         {
           method: "POST",
           headers: {
@@ -76,6 +78,8 @@ export const loginUser1FA = createAsyncThunk(
         const errorData = await response.json();
         throw new Error(errorData.detail || "Error al iniciar sesión");
       }
+      const data = await response.json()
+      console.log(data)
       return email;
     } catch (err: any) {
       return thunkAPI.rejectWithValue(
@@ -101,7 +105,7 @@ export const loginUser2FA = createAsyncThunk<
 >("auth/loginUser2FA", async ({ email, code }, thunkAPI) => {
   try {
     const response = await fetch(
-      "https://mvp-api-test-771209590309.us-east1.run.app/auth/login_step2",
+      `${API_URL}/auth/login_step2`,
       {
         method: "POST",
         headers: {
@@ -125,7 +129,7 @@ export const loginUser2FA = createAsyncThunk<
     }
 
     const userResponse = await fetch(
-      "https://mvp-api-test-771209590309.us-east1.run.app/users/all-me",
+      `${API_URL}/users/all-me`,
       {
         method: "GET",
         headers: {
@@ -140,7 +144,7 @@ export const loginUser2FA = createAsyncThunk<
 
     const { data } = await userResponse.json();
     console.log("Datos de usuario:", data.projects);
-    
+
     return {
       token,
       username: data.username,
@@ -182,7 +186,7 @@ export const getUserAllInfo = createAsyncThunk<
   const { dispatch } = thunkAPI;
   try {
     const userResponse = await fetch(
-      "https://mvp-api-test-771209590309.us-east1.run.app/users/all-me",
+      `${API_URL}/users/all-me`,
       {
         method: "GET",
         headers: {
@@ -254,7 +258,6 @@ const authSlice = createSlice({
       }),
         (state.id = null);
       state.permissions = [];
-
     },
   },
   extraReducers: (builder) => {

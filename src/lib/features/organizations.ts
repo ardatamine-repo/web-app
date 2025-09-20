@@ -26,7 +26,7 @@ interface OrganizationsState {
 }
 
 const initialState: OrganizationsState = {
-  name:"",
+  name: "",
   organizations: [],
   loading: false,
   loadingIndividual: false,
@@ -41,7 +41,7 @@ export const getOrganizations = createAsyncThunk(
   async (token: string | null, thunkAPI) => {
     try {
       const res = await fetch(
-        `https://mvp-api-test-771209590309.us-east1.run.app/organizations`,
+        `https://apigestion.ardatamine.com/v1/organizations`,
         {
           method: "GET",
           headers: {
@@ -73,7 +73,7 @@ export const getOrganizationById = createAsyncThunk(
     try {
       const [usersRes, orgRes] = await Promise.all([
         fetch(
-          `https://mvp-api-test-771209590309.us-east1.run.app/organizations/${id}/users`,
+          `https://apigestion.ardatamine.com/v1/organizations/${id}/users`,
           {
             method: "GET",
             headers: {
@@ -84,7 +84,7 @@ export const getOrganizationById = createAsyncThunk(
           }
         ),
         // fetch(
-        //   `https://mvp-api-test-771209590309.us-east1.run.app/organizations/${id}/projects`,
+        //   `https://apigestion.ardatamine.com/v1/organizations/${id}/projects`,
         //   {
         //     method: "GET",
         //     headers: {
@@ -94,24 +94,21 @@ export const getOrganizationById = createAsyncThunk(
         //     },
         //   }
         // ),
-        fetch(
-          `https://mvp-api-test-771209590309.us-east1.run.app/organizations/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        ),
+        fetch(`https://apigestion.ardatamine.com/v1/organizations/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }),
       ]);
 
       if (!usersRes.ok)
         throw new Error(
           `Error users ${usersRes.status}: ${usersRes.statusText}`
         );
-      
+
       if (!orgRes.ok)
         throw new Error(`Error org ${orgRes.status}: ${orgRes.statusText}`);
 
@@ -133,7 +130,7 @@ export const getOrganizationProyects = createAsyncThunk(
   async ({ id, token }: { id: string; token: string }, thunkAPI) => {
     try {
       const res = await fetch(
-        `https://mvp-api-test-771209590309.us-east1.run.app/organizations/${id}/projects`,
+        `https://apigestion.ardatamine.com/v1/organizations/${id}/projects`,
         {
           method: "GET",
           headers: {
@@ -148,7 +145,7 @@ export const getOrganizationProyects = createAsyncThunk(
       }
       const projects = await res.json();
       return {
-        projects:projects,
+        projects: projects,
       };
     } catch (error) {
       console.error("Error fetching organization full data:", error);
@@ -168,7 +165,7 @@ export const createOrganization = createAsyncThunk(
   ) => {
     try {
       const res = await fetch(
-        "https://mvp-api-test-771209590309.us-east1.run.app/organizations/",
+        "https://apigestion.ardatamine.com/v1/organizations/",
         {
           method: "POST",
           headers: {
@@ -208,7 +205,7 @@ export const updateOrganization = createAsyncThunk(
   ) => {
     try {
       const res = await fetch(
-        `https://mvp-api-test-771209590309.us-east1.run.app/organizations/${organizationId}`,
+        `https://apigestion.ardatamine.com/v1/organizations/${organizationId}`,
         {
           method: "PUT",
           headers: {
@@ -243,7 +240,7 @@ export const deleteOrganization = createAsyncThunk(
   ) => {
     try {
       const res = await fetch(
-        `https://mvp-api-test-771209590309.us-east1.run.app/organizations/${organizationId}`,
+        `https://apigestion.ardatamine.com/v1/organizations/${organizationId}`,
         {
           method: "DELETE",
           headers: {
@@ -271,17 +268,14 @@ export const createUser = createAsyncThunk(
   "users/create",
   async ({ token, userData }: { token: string; userData: any }, thunkAPI) => {
     try {
-      const res = await fetch(
-        "https://mvp-api-test-771209590309.us-east1.run.app/users/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(userData),
-        }
-      );
+      const res = await fetch("https://apigestion.ardatamine.com/v1/users/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(userData),
+      });
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -436,7 +430,6 @@ const organizationsSlice = createSlice({
           action.payload || action.error.message
         );
       });
-      
   },
 });
 

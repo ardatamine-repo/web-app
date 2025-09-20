@@ -1,15 +1,13 @@
 export const fetchOrganizations = async (token: string) => {
-
   try {
     const res = await fetch(
-      `https://mvp-api-test-771209590309.us-east1.run.app/organizations/`,
+      `https://apigestion.ardatamine.com/v1/organizations/`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization:
-            `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -25,20 +23,20 @@ export const fetchOrganizations = async (token: string) => {
   }
 };
 
-export const fetchOrganization = async (token: string, idOrganization: string) => {
-
+export const fetchOrganization = async (
+  token: string,
+  idOrganization: string
+) => {
   try {
     const res = await fetch(
-      `https://mvp-api-test-771209590309.us-east1.run.app/organizations/${idOrganization}`,
+      `https://apigestion.ardatamine.com/v1/organizations/${idOrganization}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization:
-            `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-        
       }
     );
 
@@ -53,18 +51,19 @@ export const fetchOrganization = async (token: string, idOrganization: string) =
   }
 };
 
-export const createOrganization = async (token: string,newOrganization:{}) => {
-
+export const createOrganization = async (
+  token: string,
+  newOrganization: {}
+) => {
   try {
     const res = await fetch(
-      `https://mvp-api-test-771209590309.us-east1.run.app/organizations/`,
+      `https://apigestion.ardatamine.com/v1/organizations/`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization:
-            `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newOrganization),
       }
@@ -80,18 +79,19 @@ export const createOrganization = async (token: string,newOrganization:{}) => {
     console.error("Error fetching data :", error);
   }
 };
-export const updateOrganization = async (token: string,newOrganization:{}) => {
-
+export const updateOrganization = async (
+  token: string,
+  newOrganization: {}
+) => {
   try {
     const res = await fetch(
-      `https://mvp-api-test-771209590309.us-east1.run.app/organizations/`,
+      `https://apigestion.ardatamine.com/v1/organizations/`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization:
-            `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newOrganization),
       }
@@ -107,18 +107,16 @@ export const updateOrganization = async (token: string,newOrganization:{}) => {
     console.error("Error fetching data :", error);
   }
 };
-export const deleteOrganization = async (token: string,idOrganization:{}) => {
-
+export const deleteOrganization = async (token: string, idOrganization: {}) => {
   try {
     const res = await fetch(
-      `https://mvp-api-test-771209590309.us-east1.run.app/organizations/`,
+      `https://apigestion.ardatamine.com/v1/organizations/`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization:
-            `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );

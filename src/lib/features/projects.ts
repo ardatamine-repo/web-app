@@ -58,7 +58,7 @@ export const getProjectById = createAsyncThunk(
   async ({ id, token }: { id: string; token: string }, thunkAPI) => {
     try {
       const res = await fetch(
-        `https://mvp-api-test-771209590309.us-east1.run.app/projects/${id}`,
+        `https://apigestion.ardatamine.com/v1/projects/${id}`,
         {
           method: "GET",
           headers: {
@@ -87,18 +87,15 @@ export const createProject = createAsyncThunk(
     const { dispatch } = thunkAPI;
     console.log(dataCreateForm);
     try {
-      const res = await fetch(
-        "https://mvp-api-test-771209590309.us-east1.run.app/projects",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${dataCreateForm.token}`,
-          },
-          body: JSON.stringify(dataCreateForm.projectData),
-        }
-      );
+      const res = await fetch("https://apigestion.ardatamine.com/v1/projects", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${dataCreateForm.token}`,
+        },
+        body: JSON.stringify(dataCreateForm.projectData),
+      });
 
       if (!res.ok) {
         throw new Error(`Error ${res.status}: ${res.statusText}`);
@@ -123,7 +120,7 @@ export const deleteProject = createAsyncThunk(
   async (data: any, thunkAPI) => {
     try {
       const res = await fetch(
-        `https://mvp-api-test-771209590309.us-east1.run.app/projects/${data.idProject}`,
+        `https://apigestion.ardatamine.com/v1/projects/${data.idProject}`,
         {
           method: "DELETE",
           headers: {
@@ -150,7 +147,7 @@ export const updateProject = createAsyncThunk(
     console.log(data);
     try {
       const res = await fetch(
-        `https://mvp-api-test-771209590309.us-east1.run.app/projects/${data.projectId}`,
+        `https://apigestion.ardatamine.com/v1/projects/${data.projectId}`,
         {
           method: "PUT",
           headers: {

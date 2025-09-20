@@ -21,7 +21,7 @@ export const getOrganizationsAdmin = createAsyncThunk(
   async (token: string | null, thunkAPI) => {
     try {
       const res = await fetch(
-        `https://mvp-api-test-771209590309.us-east1.run.app/organizations`,
+        `https://apigestion.ardatamine.com/v1/organizations`,
         {
           method: "GET",
           headers: {
@@ -67,9 +67,7 @@ const adminSlice = createSlice({
       })
       .addCase(getOrganizationsAdmin.rejected, (state) => {
         state.loading = false;
-      })
-
-     
+      });
   },
 });
 

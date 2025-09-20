@@ -28,6 +28,7 @@ export default function Login() {
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
   const handleSubmit1FA = async (e: React.FormEvent) => {
+    console.log("test");
     e.preventDefault();
     dispatch(loginUser1FA({ email, password }))
       .unwrap()
@@ -41,7 +42,7 @@ export default function Login() {
   //   console.log(email,password)
   //   try {
   //     const res = await fetch(
-  //       "https://mvp-api-test-771209590309.us-east1.run.app/auth/login_step1",
+  //       "https://apigestion.ardatamine.com/v1/auth/login_step1",
   //       {
   //         method: "POST",
   //         headers: { "Content-Type": "application/json" },
@@ -73,10 +74,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen  flex items-center justify-center p-4 relative">
-      {open2FA && (
-        <TwoFactorVerification email={email}
-        />
-      )}
+      {open2FA && <TwoFactorVerification email={email} />}
       <div className="relative z-10 w-full max-w-md bg-white rounded-xl p-8 text-gray-900 shadow-xl border border-gray-300">
         <div className="flex justify-center mb-6">
           <Image
