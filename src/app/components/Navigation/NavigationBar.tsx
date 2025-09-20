@@ -7,7 +7,7 @@ import { publicPaths } from "@/app/utils/publicRoutes";
 
 export default function NavigationBar() {
   const pathname = usePathname();
-  
+  console.log(pathname)
 
   if (publicPaths.includes(pathname)) {
     return null;

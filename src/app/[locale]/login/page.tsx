@@ -29,7 +29,6 @@ export default function Login() {
 
   const handleSubmit1FA = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(email, password);
     dispatch(loginUser1FA({ email, password }))
       .unwrap()
       .then(() => {
