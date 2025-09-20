@@ -10,6 +10,7 @@ export default function NavigationBar() {
   console.log(pathname)
 
   if (publicPaths.includes(pathname)) {
+    console.log(publicPaths,pathname)
     return null;
   }
 
