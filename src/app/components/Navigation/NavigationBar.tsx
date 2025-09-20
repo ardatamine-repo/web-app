@@ -1,4 +1,3 @@
-// components/NavigationBar.tsx
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -7,10 +6,11 @@ import { publicPaths } from "@/app/utils/publicRoutes";
 
 export default function NavigationBar() {
   const pathname = usePathname();
-  console.log(pathname)
+
+  // Esperar a que pathname esté definido (esto previene render incorrecto en SSR)
+  if (!pathname) return null;
 
   if (publicPaths.includes(pathname)) {
-    console.log(publicPaths,pathname)
     return null;
   }
 
