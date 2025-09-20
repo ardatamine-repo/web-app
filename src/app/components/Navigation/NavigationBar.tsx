@@ -13,6 +13,7 @@ export default function NavigationBar() {
   if (publicPaths.includes(pathname)) {
     return null;
   }
+  
 
   return <NavigationBarContent />;
 }
