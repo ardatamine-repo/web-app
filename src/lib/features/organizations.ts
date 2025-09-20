@@ -26,6 +26,7 @@ interface OrganizationsState {
 }
 
 const initialState: OrganizationsState = {
+  name:"",
   organizations: [],
   loading: false,
   loadingIndividual: false,
